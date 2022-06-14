@@ -1,5 +1,6 @@
 const { default: axios } = require("axios");
 const config = require("../Config");
+const { getAllGamesService } = require("../Services/games.service");
 const { categoryGames, generatePagination } = require("../Utils");
 
 module.exports = {
@@ -9,11 +10,8 @@ module.exports = {
     const PAGE = Number(page)
 
     try {
-      const response = await axios.get(
-        "https://mmo-games.p.rapidapi.com/games",
-        config
-      );
-      const allGames = response.data;
+     const allGames = await getAllGamesService()
+     
       if (PAGE) {
         const count = allGames.length;
         let nextPage;
@@ -80,4 +78,11 @@ module.exports = {
       return res.status(400).json({ error: error.message });
     }
   },
+  getPopularGames: async (req, res) => {
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 };
