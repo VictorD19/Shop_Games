@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 const categoryGames = [
   "MMORPG",
   "Shooter",
@@ -30,9 +32,20 @@ const getItemsByArray = (list, amountItems) => {
   }
   return newList;
 };
+const generaToken = (params = {}) => {
+  return jwt.sign(params, process.env.SECRET_KEY, {
+    expiresIn: "1d",
+  });
+};
+const isEmail = (email) => {
+  const reg = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+  return reg.test(email) ? true : false;
+};
 module.exports = {
   categoryGames,
   generatePagination,
   getNumberRandom,
   getItemsByArray,
+  generaToken,
+  isEmail
 };
