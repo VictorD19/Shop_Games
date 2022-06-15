@@ -1,6 +1,6 @@
 const express = require('express')
 const { getAllGames, getGame, getNews, getCategoryOfGames, getPopularGames, getNewGames, getRecommendedGames } = require('../Controller/GamesController')
-const { createUser } = require('../Controller/UserController')
+const { createUser, loginUser } = require('../Controller/UserController')
 const Routes = express.Router()
 
 Routes.get('/allgames',getAllGames)
@@ -13,5 +13,6 @@ Routes.get('/newgames',getNewGames)
 
 
 Routes.post('/newuser',createUser)
+Routes.post('/login',loginUser)
 
 module.exports = Routes
