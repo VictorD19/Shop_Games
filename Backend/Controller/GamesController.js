@@ -4,14 +4,12 @@ const {
   getAllGamesService,
   getGameService,
 } = require("../Services/games.service");
-const JsonGames = require("../DB/Data/Games.json");
 const {
   categoryGames,
   generatePagination,
   getItemsByArray,
 } = require("../Utils");
-const { Game } = require("../DB");
-const { default: mongoose } = require("mongoose");
+
 
 module.exports = {
   getAllGames: async (req, res) => {
