@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const CartSchema = new Schema({
   _id: String,
-  idUser: mongoose.Types.ObjectId(),
-  idGame: mongoose.Types.ObjectId(),
+  idUser: Schema.Types.ObjectId,
+  idGame: Schema.Types.ObjectId,
   amount: Number,
   total: [Number],
   createAt: { type: Date, default: Date.now },
