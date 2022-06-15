@@ -1,17 +1,27 @@
 const { default: axios } = require("axios");
 const config = require("../Config");
-const { getAllGamesService } = require("../Services/games.service");
-const { categoryGames, generatePagination } = require("../Utils");
+const {
+  getAllGamesService,
+  getGameService,
+} = require("../Services/games.service");
+const JsonGames = require("../DB/Data/Games.json");
+const {
+  categoryGames,
+  generatePagination,
+  getItemsByArray,
+} = require("../Utils");
+const { Game } = require("../DB");
+const { default: mongoose } = require("mongoose");
 
 module.exports = {
   getAllGames: async (req, res) => {
     const { page, per_page } = req.query;
     const nPerPage = per_page || 20;
-    const PAGE = Number(page)
+    const PAGE = Number(page);
 
     try {
-     const allGames = await getAllGamesService()
-     
+      const allGames = await getAllGamesService();
+
       if (PAGE) {
         const count = allGames.length;
         let nextPage;
@@ -48,14 +58,9 @@ module.exports = {
   getGame: async (req, res) => {
     try {
       const { id } = req.params;
-      if (!Number(id) || !id) {
-        throw new Error("Informe um id valido");
-      }
-      const game = await axios.get("https://mmo-games.p.rapidapi.com/game", {
-        ...config,
-        params: { id },
-      });
-      return res.json(game.data);
+
+      const game = await getGameService(id);
+      return res.json(game);
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
@@ -80,9 +85,30 @@ module.exports = {
   },
   getPopularGames: async (req, res) => {
     try {
-      
+      const allGames = await getAllGamesService();
+
+      const popularGames = getItemsByArray(allGames, 15);
+      return res.json(popularGames);
     } catch (error) {
-      
+      return res.status(400).json({ error: error.message });
     }
-  }
+  },
+  getRecommendedGames: async (req, res) => {
+    try {
+      const allGames = await getAllGamesService();
+      const popularGames = getItemsByArray(allGames, 15);
+      return res.json(popularGames);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+  getNewGames: async (req, res) => {
+    try {
+      const allGames = await getAllGamesService();
+      const popularGames = getItemsByArray(allGames, 15);
+      return res.json(popularGames);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
 };
