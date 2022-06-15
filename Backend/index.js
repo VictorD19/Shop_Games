@@ -6,7 +6,7 @@ const Routes = require('./Routes')
 require('./DB/start.js');
 const port = 3001
 
-app.use('/',Routes)
-app.use(bodyP.urlencoded({ extended:true }));
 app.use(bodyP.json())
+app.use(bodyP.urlencoded({ extended:true }));
+app.use('/',Routes)
 app.listen(port, () => console.log(`🚀 Api Iniciada na porta:  ${port}!`))
