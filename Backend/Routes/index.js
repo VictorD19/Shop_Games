@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllGames, getGame, getNews, getCategoryOfGames, getPopularGames, getNewGames } = require('../Controller/GamesController')
+const { getAllGames, getGame, getNews, getCategoryOfGames, getPopularGames, getNewGames, getRecommendedGames } = require('../Controller/GamesController')
 const Routes = express.Router()
 
 Routes.get('/allgames',getAllGames)
