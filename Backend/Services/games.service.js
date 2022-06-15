@@ -1,5 +1,5 @@
 const { Game } = require("../DB");
-const axios = require('axios');
+const axios = require("axios");
 const config = require("../Config");
 module.exports = {
   getAllGamesService: async () => {
@@ -10,17 +10,22 @@ module.exports = {
     }
   },
   getGameService: async (id) => {
-    
     try {
-      const {GameId} = await Game.findById(id);      
-      const gameDetails = await axios.get("https://mmo-games.p.rapidapi.com/game", {
-        ...config,
-        params: { id: GameId},
-      });
-      return gameDetails.data
+      const game = await Game.findById(id);
+      if (!game) {
+        throw new Error("Jogo não encontrado!");
+      }
+      const { GameId } = game;
+      const gameDetails = await axios.get(
+        "https://mmo-games.p.rapidapi.com/game",
+        {
+          ...config,
+          params: { id: GameId },
+        }
+      );
+      return gameDetails.data;
     } catch (error) {
       return { error: error.message };
     }
-
   },
 };

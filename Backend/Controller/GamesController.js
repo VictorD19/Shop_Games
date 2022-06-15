@@ -58,6 +58,9 @@ module.exports = {
       const { id } = req.params;
 
       const game = await getGameService(id);
+      if(game.error){
+        throw new Error(game.error)
+      }
       return res.json(game);
     } catch (error) {
       return res.status(400).json({ error: error.message });
