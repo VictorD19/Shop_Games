@@ -3,9 +3,11 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: String,
-  email: String,
+  email: {
+    type: String,
+    unique: true
+  },
   password: String,
-  cart: [Number],
   createAt: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },
 });
