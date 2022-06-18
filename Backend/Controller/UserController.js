@@ -1,4 +1,4 @@
-const { User } = require("../DB");
+const { User, Cart } = require("../DB");
 const bcrypt = require("bcrypt");
 const { generaToken, isEmail } = require("../Utils");
 
@@ -24,6 +24,13 @@ module.exports = {
         const passwordHash = await bcrypt.hash(password, saltRounds);
         const user = new User({ email, password: passwordHash });
         await user.save();
+        const cart = new Cart({
+          idUser: user.id,
+          products: [],
+          amount: 0,
+          total: 0,
+        });
+        await cart.save()
 
         user.password = undefined;
 
