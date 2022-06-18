@@ -41,11 +41,17 @@ const isEmail = (email) => {
   const reg = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
   return reg.test(email) ? true : false;
 };
+const reduce = (previousValue, currentValue) => previousValue + currentValue
+const getTotalPrice = (list)=>{
+  const prices = list.map(item=> item.price)
+  return prices.reduce(reduce)
+}
 module.exports = {
   categoryGames,
   generatePagination,
   getNumberRandom,
   getItemsByArray,
   generaToken,
-  isEmail
+  isEmail,
+  getTotalPrice
 };
