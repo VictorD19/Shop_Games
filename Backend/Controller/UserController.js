@@ -4,6 +4,15 @@ const { generaToken, isEmail } = require("../Utils");
 
 module.exports = {
   createUser: async (req, res) => {
+    // #swagger.tags = ['Usuario']
+    // #swagger.description = 'Criação de novo usuarios'
+    /*  #swagger.parameters['obj'] = {
+                in: 'body',
+                schema: {
+                    email: 'bertramvictor61@gmail.com',
+                    password:'K79OUIOj.'
+                }
+        } */
     try {
       const { email, password } = req.body;
 
@@ -30,7 +39,7 @@ module.exports = {
           amount: 0,
           total: 0,
         });
-        await cart.save()
+        await cart.save();
 
         user.password = undefined;
 
@@ -46,6 +55,15 @@ module.exports = {
     }
   },
   loginUser: async (req, res) => {
+    // #swagger.tags = ['Usuario']
+    // #swagger.description = 'Inicia sessão do usuario'
+    /*  #swagger.parameters['obj'] = {
+                in: 'body',
+                schema: {
+                    email: 'bertramvictor61@gmail.com',
+                    password:'K79OUIOj.'
+                }
+        } */
     try {
       const { email, password } = req.body;
       if (!email) throw new Error("Precisa informar um email!");
