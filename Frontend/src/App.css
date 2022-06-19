@@ -1,18 +1,14 @@
 :root {
-  --primary: #8307FF;
-  --secondary: #615EF9;
-  --white: #E1E1FA;
+  --primary: #8307ff;
+  --secondary: #615ef9;
+  --white: #e1e1fa;
   --gray: #6e6e89;
-  --yellow: #F8CB62;
-  --green: #09BA7A;
-  
+  --yellow: #f8cb62;
+  --green: #09ba7a;
 }
 
 * {
-	font-family: "Montserrat", sans-serif;
-	box-sizing: border-box;
-  background: #1D1926;
-  color:#fff;
-  }
-  
-  
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+  color: #fff;
+}
