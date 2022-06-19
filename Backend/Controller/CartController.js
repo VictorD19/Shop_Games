@@ -4,6 +4,11 @@ const { getTotalPrice } = require("../Utils");
 
 module.exports = {
   async getCartDetails(req, res) {
+    // #swagger.tags = ['Cart']
+    // #swagger.description = 'Detalhes do carinho de compras'
+    /* #swagger.security = [{
+      "apiKeyAuth": []
+    }] */
     try {
       const idUser = res.userId;
       const [cartDetails] = await Cart.find({ idUser: idUser });
@@ -15,6 +20,11 @@ module.exports = {
     }
   },
   async addItemCart(req, res) {
+    // #swagger.tags = ['Cart']
+    // #swagger.description = 'Adiciona um item ao carinho de compras'
+    /* #swagger.security = [{
+      "apiKeyAuth": []
+    }] */
     try {
       const { idGame } = req.params;
       const idUser = res.userId;
@@ -50,6 +60,11 @@ module.exports = {
     }
   },
   async deleteItemCart(req, res) {
+       // #swagger.tags = ['Cart']
+    // #swagger.description = 'Elimina item do carrinho de compras'
+    /* #swagger.security = [{
+      "apiKeyAuth": []
+    }] */
     try {
       const { idGame } = req.params;
       const idUser = res.userId;
