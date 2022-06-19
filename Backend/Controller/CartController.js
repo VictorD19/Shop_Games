@@ -25,6 +25,11 @@ module.exports = {
         );
 
       const [cartDetails] = await Cart.find({ idUser: idUser });
+      const [existGameInCart] = cartDetails.products.filter(
+        (game) => game.idGame === idGame
+      );
+      if (existGameInCart) throw new Error("Item já esta no carrinho");
+
       const { title, price } = findGame;
       const game = {
         idGame,
