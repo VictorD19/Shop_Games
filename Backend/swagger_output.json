@@ -10,10 +10,20 @@
   "schemes": [
     "http"
   ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization"
+    }
+  },
   "paths": {
     "/allgames": {
       "get": {
-        "description": "",
+        "tags": [
+          "Games"
+        ],
+        "description": "Obtem todos os games ou eles paginados",
         "parameters": [
           {
             "name": "page",
@@ -38,7 +48,10 @@
     },
     "/game/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Games"
+        ],
+        "description": "Retorna game por id",
         "parameters": [
           {
             "name": "id",
@@ -59,7 +72,10 @@
     },
     "/news": {
       "get": {
-        "description": "",
+        "tags": [
+          "News"
+        ],
+        "description": "Retorna as utimas noticias relaciona aos games",
         "parameters": [],
         "responses": {
           "200": {
@@ -73,7 +89,10 @@
     },
     "/categorys": {
       "get": {
-        "description": "",
+        "tags": [
+          "Games"
+        ],
+        "description": "Retorna todas as categorias dos games",
         "parameters": [],
         "responses": {
           "200": {
@@ -87,7 +106,10 @@
     },
     "/populargames": {
       "get": {
-        "description": "",
+        "tags": [
+          "Games"
+        ],
+        "description": "Retorna todos os games populares",
         "parameters": [],
         "responses": {
           "200": {
@@ -101,7 +123,10 @@
     },
     "/recommendedgames": {
       "get": {
-        "description": "",
+        "tags": [
+          "Games"
+        ],
+        "description": "Retorna todos os games recomendados",
         "parameters": [],
         "responses": {
           "200": {
@@ -115,7 +140,10 @@
     },
     "/newgames": {
       "get": {
-        "description": "",
+        "tags": [
+          "Games"
+        ],
+        "description": "Retorna todos novos games",
         "parameters": [],
         "responses": {
           "200": {
@@ -129,19 +157,24 @@
     },
     "/newuser": {
       "post": {
-        "description": "",
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Criação de novo usuarios",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "bertramvictor61@gmail.com"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "K79OUIOj."
                 }
               }
             }
@@ -162,19 +195,24 @@
     },
     "/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Inicia sessão do usuario",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "bertramvictor61@gmail.com"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "K79OUIOj."
                 }
               }
             }
@@ -192,7 +230,10 @@
     },
     "/cart_details": {
       "get": {
-        "description": "",
+        "tags": [
+          "Cart"
+        ],
+        "description": "Detalhes do carinho de compras",
         "parameters": [
           {
             "name": "authorization",
@@ -210,12 +251,20 @@
           "401": {
             "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/add_item_cart/{idGame}": {
       "post": {
-        "description": "",
+        "tags": [
+          "Cart"
+        ],
+        "description": "Adiciona um item ao carinho de compras",
         "parameters": [
           {
             "name": "idGame",
@@ -239,12 +288,20 @@
           "401": {
             "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/delete_item_cart/{idGame}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Cart"
+        ],
+        "description": "Elimina item do carrinho de compras",
         "parameters": [
           {
             "name": "idGame",
@@ -268,7 +325,12 @@
           "401": {
             "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     }
   }
