@@ -10,9 +10,11 @@ const {
   getItemsByArray,
 } = require("../Utils");
 
-
 module.exports = {
   getAllGames: async (req, res) => {
+    // #swagger.tags = ['Games']
+    // #swagger.description = 'Obtem todos os games ou eles paginados'
+
     const { page, per_page } = req.query;
     const nPerPage = per_page || 20;
     const PAGE = Number(page);
@@ -54,12 +56,15 @@ module.exports = {
     }
   },
   getGame: async (req, res) => {
+    // #swagger.tags = ['Games']
+    // #swagger.description = 'Retorna game por id'
+
     try {
       const { id } = req.params;
 
       const game = await getGameService(id);
-      if(game.error){
-        throw new Error(game.error)
+      if (game.error) {
+        throw new Error(game.error);
       }
       return res.json(game);
     } catch (error) {
@@ -67,6 +72,8 @@ module.exports = {
     }
   },
   getNews: async (req, res) => {
+    // #swagger.tags = ['News']
+    // #swagger.description = 'Retorna as utimas noticias relaciona aos games'
     try {
       const news = await axios.get(
         "https://mmo-games.p.rapidapi.com/latestnews",
@@ -78,6 +85,8 @@ module.exports = {
     }
   },
   getCategoryOfGames: async (req, res) => {
+    // #swagger.tags = ['Games']
+    // #swagger.description = 'Retorna todas as categorias dos games'
     try {
       return res.json(categoryGames);
     } catch (error) {
@@ -85,6 +94,8 @@ module.exports = {
     }
   },
   getPopularGames: async (req, res) => {
+    // #swagger.tags = ['Games']
+    // #swagger.description = 'Retorna todos os games populares'
     try {
       const allGames = await getAllGamesService();
 
@@ -95,6 +106,8 @@ module.exports = {
     }
   },
   getRecommendedGames: async (req, res) => {
+    // #swagger.tags = ['Games']
+    // #swagger.description = 'Retorna todos os games recomendados'
     try {
       const allGames = await getAllGamesService();
       const popularGames = getItemsByArray(allGames, 15);
@@ -104,6 +117,8 @@ module.exports = {
     }
   },
   getNewGames: async (req, res) => {
+     // #swagger.tags = ['Games']
+    // #swagger.description = 'Retorna todos novos games'
     try {
       const allGames = await getAllGamesService();
       const popularGames = getItemsByArray(allGames, 15);
