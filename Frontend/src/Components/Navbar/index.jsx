@@ -7,6 +7,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
+  FormLogin,
   NavbarContainer,
   PartOptions,
   PartUser,
@@ -22,15 +23,30 @@ import { CgGames } from "react-icons/cg";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { useState } from "react";
 import { ModalContainer } from "../Modal";
+import { NewInputForm } from "../Input";
+import { Formik } from "formik";
+import { NewButton } from "../Button";
+
+const dataLogin = {
+  email: "",
+  password: "",
+};
+
 export const Navbar = () => {
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isNewUser, setNewUser] = useState(true);
 
   const login = false;
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleLoginUser = () => setNewUser(true);
+  const handleRegister = () => setNewUser(false);
+  const handleLogin = (values) => {};
+
   return (
     <>
       <NavbarContainer>
@@ -88,7 +104,9 @@ export const Navbar = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <ListGroup variant="flush">
-            <ListGroup.Item onClick={handleShowModal}>Login / Register</ListGroup.Item>
+            <ListGroup.Item onClick={handleShowModal}>
+              Login / Register
+            </ListGroup.Item>
             <ListGroup.Item>All Games</ListGroup.Item>
             <ListGroup.Item>New News</ListGroup.Item>
             <ListGroup.Item>Sair</ListGroup.Item>
@@ -99,7 +117,43 @@ export const Navbar = () => {
         title="Login / Register"
         show={showModal}
         close={handleCloseModal}
-      >asdasds</ModalContainer>
+      >
+        <Formik initialValues={dataLogin} onSubmit={handleLogin}>
+          {({ handleSubmit, handleChange, errors, values }) => (
+            <FormLogin>
+              <NewInputForm
+                name="email"
+                label="Email"
+                onChange={handleChange}
+                error={errors.email}
+                value={values.email}
+              />
+              <NewInputForm
+                name="password"
+                label="Password"
+                onChange={handleChange}
+                error={errors.password}
+                value={values.password}
+              />
+              <div>
+                <NewButton>{isNewUser ? "Login" : "Register"}</NewButton>
+              </div>
+
+              <hr />
+              {isNewUser ? (
+                <p>
+                  Não tem Conta?{" "}
+                  <span onClick={handleRegister}>Register</span>
+                </p>
+              ) : (
+                <p>
+                  Já tenho Conta? <span onClick={handleLoginUser}>Login</span>
+                </p>
+              )}
+            </FormLogin>
+          )}
+        </Formik>
+      </ModalContainer>
     </>
   );
 };

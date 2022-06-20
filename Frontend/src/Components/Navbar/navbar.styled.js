@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Offcanvas } from "react-bootstrap";
+import { Form, Offcanvas } from "react-bootstrap";
 
 export const NavbarContainer = styled.div`
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -79,12 +79,12 @@ export const PartUser = styled.div`
       background-color: var(--primary);
     }
   }
-  .login{
+  .login {
     cursor: pointer;
-
   }
   @media only screen and (max-width: 600px) {
-    img,> div {
+    img,
+    > div {
       display: none;
     }
     width: 1.5rem;
@@ -94,14 +94,13 @@ export const PartUser = styled.div`
       display: block;
       padding: 0 5px;
     }
-    .login{
-      display:none ;
+    .login {
+      display: none;
     }
   }
 `;
 
 export const PartOptions = styled.div`
-
   a:nth-child(2) {
     display: none;
   }
@@ -136,7 +135,34 @@ export const PartOptions = styled.div`
 `;
 
 export const RightMenu = styled(Offcanvas)`
-  .offcanvas-title,.offcanvas-body{
+  .offcanvas-title,
+  .offcanvas-body {
     color: var(--gray);
+  }
+`;
+
+export const FormLogin = styled(Form)`
+  > div {
+    margin: 10px 0;
+  }
+  > div:nth-child(3) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    border: 1px solid var(--primary);
+  }
+  p {
+    text-align: center;
+    span {
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+      :hover {
+        text-decoration: underline;
+      }
+    }
   }
 `;
