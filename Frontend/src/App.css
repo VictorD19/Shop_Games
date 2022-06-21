@@ -5,10 +5,12 @@
   --gray: #6e6e89;
   --warning: #f8cb62;
   --success: #09ba7a;
-  --danger: #B02120;
+  --danger: #b02120;
 }
 
 * {
-  font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", sans-serif;
 }
