@@ -8,6 +8,7 @@ const {
   categoryGames,
   generatePagination,
   getItemsByArray,
+  getNumberRandom,
 } = require("../Utils");
 
 module.exports = {
@@ -117,12 +118,33 @@ module.exports = {
     }
   },
   getNewGames: async (req, res) => {
-     // #swagger.tags = ['Games']
+    // #swagger.tags = ['Games']
     // #swagger.description = 'Retorna todos novos games'
     try {
       const allGames = await getAllGamesService();
       const popularGames = getItemsByArray(allGames, 15);
       return res.json(popularGames);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+  getTrendingGame: async (req, res) => {
+    // #swagger.tags = ['Games']
+    // #swagger.description = 'Retorna games em destaques'
+    try {
+      const allGames = await getAllGamesService();
+      const listTrending = [];
+      const numberGamesTrend = 6;
+
+      for (let i = 0; i < numberGamesTrend; i++) {
+        let randomNumber = getNumberRandom(allGames.length);
+        const game = allGames[randomNumber];
+        const gameFullDetails = await getGameService(game.id);
+        gameFullDetails.id = game.id;
+        gameFullDetails.GameId = game.GameId;
+        listTrending.push(gameFullDetails);
+      }
+      return res.json(listTrending);
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }

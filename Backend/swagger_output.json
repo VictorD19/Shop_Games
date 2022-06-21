@@ -155,6 +155,23 @@
         }
       }
     },
+    "/trending_games": {
+      "get": {
+        "tags": [
+          "Games"
+        ],
+        "description": "Retorna games em destaques",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/newuser": {
       "post": {
         "tags": [
