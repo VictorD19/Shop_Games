@@ -88,4 +88,20 @@ module.exports = {
       return res.status(400).json({ error: error.message });
     }
   },
+  getDataUser: async (req, res) => {
+    // #swagger.tags = ['Usuario']
+    // #swagger.description = 'Retorna datos del usuario'
+    /* #swagger.security = [{
+      "apiKeyAuth": []
+    }] */
+    try {
+      const idUser = res.userId;
+      if (!idUser) throw new Error("Imposiver buscar usuario não existe.");
+      const { email, _id,games } = await User.findById(idUser);
+
+      return res.status(200).json({ email, _id,games });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
 };
