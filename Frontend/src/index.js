@@ -7,6 +7,9 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "react-bootstrap";
 import { AlertsProvider } from "./Context/alertContext";
 import { UserProvider } from "./Context/userContext";
+import "../node_modules/slick-carousel/slick/slick.css";
+import "../node_modules/slick-carousel/slick/slick-theme.css";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
