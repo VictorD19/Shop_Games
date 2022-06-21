@@ -332,6 +332,37 @@
           }
         ]
       }
+    },
+    "/user_details": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Retorna datos del usuario",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
     }
   }
 }
