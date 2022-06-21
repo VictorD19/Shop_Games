@@ -3,8 +3,9 @@
   --secondary: #615ef9;
   --white: #e1e1fa;
   --gray: #6e6e89;
-  --yellow: #f8cb62;
-  --green: #09ba7a;
+  --warning: #f8cb62;
+  --success: #09ba7a;
+  --danger: #B02120;
 }
 
 * {
