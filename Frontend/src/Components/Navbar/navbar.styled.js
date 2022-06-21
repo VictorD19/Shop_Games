@@ -16,8 +16,9 @@ export const NavbarContainer = styled.div`
       background: #19171fee;
       border-radius: 8px;
       outline: none;
-      padding-left: 4px;
+      padding-left: 10px;
       padding-right: 1.8rem;
+      color: var(--white);
     }
     position: relative;
     svg {
@@ -101,13 +102,13 @@ export const PartUser = styled.div`
 `;
 
 export const PartOptions = styled.div`
-  a:nth-child(2) {
+  a:nth-child(3) {
     display: none;
   }
   a {
     margin: 0 5px;
   }
-  a:nth-child(3) {
+  a:nth-child(4) {
     position: relative;
     span {
       width: 1rem;
@@ -125,10 +126,10 @@ export const PartOptions = styled.div`
     align-items: center;
     gap: 5px;
     padding: 0 5px;
-    a:nth-child(1) {
+    a:nth-child(1),a:nth-child(2) {
       display: none;
     }
-    a:nth-child(2) {
+    a:nth-child(3) {
       display: block;
     }
   }
