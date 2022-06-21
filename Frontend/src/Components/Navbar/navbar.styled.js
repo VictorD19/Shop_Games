@@ -116,7 +116,7 @@ export const PartOptions = styled.div`
       position: absolute;
       right: -0.7rem;
       top: -0.3rem;
-      background: var(--green) !important;
+      background: var(--success) !important;
     }
   }
   @media only screen and (max-width: 600px) {
@@ -166,3 +166,7 @@ export const FormLogin = styled(Form)`
     }
   }
 `;
+
+export const ErrorAlert = styled.div`
+color: var(--danger)
+ `

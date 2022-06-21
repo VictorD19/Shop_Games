@@ -7,6 +7,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
+  ErrorAlert,
   FormLogin,
   NavbarContainer,
   PartOptions,
@@ -21,11 +22,14 @@ import {
 } from "react-icons/ai";
 import { CgGames } from "react-icons/cg";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { useState } from "react";
 import { ModalContainer } from "../Modal";
 import { NewInputForm } from "../Input";
 import { Formik } from "formik";
 import { NewButton } from "../Button";
+import { loginUser } from "../../Api/userEndpoint";
+import { createCookie } from "../../Utils/cookie";
+import { useDataUser } from "../../Context/userContext";
+import { useState } from "react";
 
 const dataLogin = {
   email: "",
@@ -36,8 +40,10 @@ export const Navbar = () => {
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isNewUser, setNewUser] = useState(true);
+  const [error, setError] = useState("");
+  const { userState, dispatch } = useDataUser();
+  const { user } = userState;
 
-  const login = false;
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
   const handleClose = () => setShow(false);
@@ -45,7 +51,24 @@ export const Navbar = () => {
 
   const handleLoginUser = () => setNewUser(true);
   const handleRegister = () => setNewUser(false);
-  const handleLogin = (values) => {};
+  const handleLogin = async (dataForm) => {
+    if (isNewUser) {
+      try {
+        const { user, token, error } = await loginUser(dataForm);
+        if (error) throw new Error(error);
+        createCookie("token", token);
+        dispatch({ method: "INITIAL_USER", data: user });
+        handleCloseModal();
+      } catch (error) {
+        setError(error.message);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+      }
+    }
+    // console.log(email, password);
+    console.log(isNewUser);
+  };
 
   return (
     <>
@@ -70,14 +93,14 @@ export const Navbar = () => {
           </Link>
         </PartOptions>
         <PartUser>
-          {login && (
+          {user?.email && (
             <>
               <DropdownButton
                 drop="start-down"
-                align="end"
+                align="start"
                 size="sm"
                 id="drop-menus"
-                title="Nome Usuario"
+                title={user?.email}
               >
                 <Dropdown.Item>Meus games</Dropdown.Item>
                 <Dropdown.Item>Sair</Dropdown.Item>
@@ -88,10 +111,12 @@ export const Navbar = () => {
               />
             </>
           )}
-          <div className="login" onClick={handleShowModal}>
-            Login / Register
-            <AiOutlineUser size={20} />
-          </div>
+          {!user?.email && (
+            <div className="login" onClick={handleShowModal}>
+              Login / Register
+              <AiOutlineUser size={20} />
+            </div>
+          )}
 
           <span onClick={handleShow}>
             <AiOutlineMenu size={20} />
@@ -135,15 +160,19 @@ export const Navbar = () => {
                 error={errors.password}
                 value={values.password}
               />
-              <div>
-                <NewButton>{isNewUser ? "Login" : "Register"}</NewButton>
-              </div>
 
+              <div>
+                <NewButton type="submit" onClick={handleSubmit}>
+                  {isNewUser ? "Login" : "Register"}
+                </NewButton>
+              </div>
+              <ErrorAlert>
+                <p>{error}</p>
+              </ErrorAlert>
               <hr />
               {isNewUser ? (
                 <p>
-                  Não tem Conta?{" "}
-                  <span onClick={handleRegister}>Register</span>
+                  Não tem Conta? <span onClick={handleRegister}>Register</span>
                 </p>
               ) : (
                 <p>
