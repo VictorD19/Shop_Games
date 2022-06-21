@@ -82,10 +82,10 @@ export const Navbar = () => {
         </div>
         <PartOptions>
           <Link to="news">
-            <BsNewspaper size={20} /> News
+            <BsNewspaper size={18} /> News
           </Link>
           <Link to="games">
-            <HiMenuAlt1 size={20} /> Catalog of games
+            <HiMenuAlt1 size={18} /> Catalog of games
           </Link>
 
           <Link to="games">
