@@ -5,14 +5,20 @@ import "./reset-css.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "react-bootstrap";
+import { AlertsProvider } from "./Context/alertContext";
+import { UserProvider } from "./Context/userContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider breakpoints={["lg", "md", "sm", "xs"]}>
-        <App />
-      </ThemeProvider>
+      <UserProvider>
+        <ThemeProvider breakpoints={["lg", "md", "sm", "xs"]}>
+          <AlertsProvider>
+            <App />
+          </AlertsProvider>
+        </ThemeProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
