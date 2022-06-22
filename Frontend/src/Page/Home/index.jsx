@@ -1,10 +1,9 @@
-import { LayoutPage } from "../../Layout"
-
-export const HomePage = ()=>{
-
-    return  (
-        <LayoutPage>
-            homeasdasasa
-        </LayoutPage>
-    )
-}
+import { LayoutPage } from "../../Layout";
+import { CarrouselMain } from "../../Components/CarrouselMain";
+export const HomePage = () => {
+  return (
+    <LayoutPage>
+      <CarrouselMain />
+    </LayoutPage>
+  );
+};
