@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const ButtonPrimary = styled(Button)`
   background: var(--primary);
+  color:#fff;
   border: 1px solid var(--primary);
   :hover {
     background: var(--primary);

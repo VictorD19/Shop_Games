@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Form, Offcanvas } from "react-bootstrap";
 
 export const NavbarContainer = styled.div`
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 2px 2px;
   display: flex;
   align-items: center;
   justify-content: space-between;

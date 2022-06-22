@@ -14,7 +14,7 @@ export const NewButton = ({
       type={type ? type : "button"}
       onClick={onClick}
       size={size || 'sm'}
-      variant={variant}
+      variant={variant || 'pulple'}
       aria-describedby={ariaDescribedby}
       disabled={disabled}
     >
