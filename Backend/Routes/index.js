@@ -1,6 +1,6 @@
 const express = require('express')
 const { getCartDetails, addItemCart, deleteItemCart } = require('../Controller/CartController')
-const { getAllGames, getGame, getNews, getCategoryOfGames, getPopularGames, getNewGames, getRecommendedGames } = require('../Controller/GamesController')
+const { getAllGames, getGame, getNews, getCategoryOfGames, getPopularGames, getNewGames, getRecommendedGames, getTrendingGame } = require('../Controller/GamesController')
 const { createUser, loginUser, getDataUser } = require('../Controller/UserController')
 const authMiddleware = require('../Middleware/auth')
 const Routes = express.Router()
@@ -12,6 +12,7 @@ Routes.get('/categorys',getCategoryOfGames)
 Routes.get('/populargames',getPopularGames)
 Routes.get('/recommendedgames',getRecommendedGames)
 Routes.get('/newgames',getNewGames)
+Routes.get('/trending_games',getTrendingGame)
 
 
 Routes.post('/newuser',createUser)

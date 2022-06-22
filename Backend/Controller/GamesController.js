@@ -142,6 +142,7 @@ module.exports = {
         const gameFullDetails = await getGameService(game.id);
         gameFullDetails.id = game.id;
         gameFullDetails.GameId = game.GameId;
+        gameFullDetails.price = game.price;
         listTrending.push(gameFullDetails);
       }
       return res.json(listTrending);
