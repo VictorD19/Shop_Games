@@ -142,7 +142,7 @@ export const Navbar = () => {
             )}
             {token && (
               <ListGroup.Item>
-                <AiOutlineUser /> {user?.email.toUpperCase()}
+                <AiOutlineUser /> {user?.email?.toUpperCase()}
               </ListGroup.Item>
             )}
 
