@@ -10,12 +10,34 @@ export const getCategoryOfGames = async () => {
     return { error: message };
   }
 };
-export const getTrendingGames =async ()=>{
+export const getTrendingGames = async () => {
   try {
-    const response = await axios.get(`${BASE_URL_API}/trending_games`)
-    return response.data
+    const response = await axios.get(`${BASE_URL_API}/trending_games`);
+    return response.data;
   } catch (error) {
     const message = error.response.data;
     return { error: message };
   }
-}
+};
+
+const getPopularGames = axios.get(`${BASE_URL_API}/populargames`);
+const getRecommendedGames = axios.get(`${BASE_URL_API}/recommendedgames`);
+const getNewsGames = axios.get(`${BASE_URL_API}/newgames`);
+
+export const getGamesInitials = async () => {
+  try {
+    const [res1,res2,res3] = await axios.all([
+      getPopularGames,
+      getRecommendedGames,
+      getNewsGames,
+    ]);
+    return{
+      popularGames: res1.data,
+      recommendedGames: res2.data,
+      newsGames: res3.data
+    }
+  } catch (error) {
+    const message = error.response.data;
+    return { error: message };
+  }
+};
