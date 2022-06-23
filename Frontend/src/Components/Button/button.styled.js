@@ -8,6 +8,7 @@ export const ButtonPrimary = styled(Button)`
   :hover {
     background: var(--primary);
     opacity: 0.8;
+    color: #fff;
     border: 1px solid var(--primary);
   }
   :active,
