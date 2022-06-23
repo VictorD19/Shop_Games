@@ -11,7 +11,7 @@ export const RowList = styled.div`
     top: -1.5rem;
   }
   .slick-prev {
-    right: 2.3rem;
+    left:94.5% ;
 }
   .slick-next {
     right: 0.8rem;
