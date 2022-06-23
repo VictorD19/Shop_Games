@@ -5,8 +5,6 @@ export const RowCarrousel = ({ children, title }) => {
   const settings = {
     infinite: true,
     speed: 500,
-    autoplay: true,
-    autoplaySpeed: 7000,
     slidesToShow: 5,
     slidesToScroll: 2,
   };
