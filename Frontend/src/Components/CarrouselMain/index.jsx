@@ -7,7 +7,6 @@ import { CarrouselItem, CarrouselMainContainer } from "./carrousel.styled";
 
 export const CarrouselMain = () => {
   const [listTrending, setList] = useState([]);
-  console.log(listTrending);
   useEffect(() => {
     (async () => {
       try {
