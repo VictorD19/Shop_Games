@@ -3,13 +3,13 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CardContainer, DescriptionCard } from "./cardGame.styled";
 import { GetScoreGame } from "../ScoreGame";
 
-export const CardGame = () => {
+export const CardGame = ({title, genre, thumbnail,id, developer, release_date, price}) => {
   return (
     <CardContainer>
       <figure>
-        <img src="https://www.mmobomb.com/g/1116/thumbnail.jpg" alt="Trulli" />
+        <img src={thumbnail} alt={title} />
         <figcaption>
-          30 $
+          {price} $
           <NewButton>
             <AiOutlineShoppingCart />
           </NewButton>
@@ -17,9 +17,9 @@ export const CardGame = () => {
       </figure>
       <DescriptionCard>
         <h1>
-          Space Punks <small>2022</small>
+         {title} <small>2022</small>
         </h1>
-        <div className="descriptionDetails">Shooter : Flying Wild Hog</div>
+        <div className="descriptionDetails">{genre} - {developer}</div>
         <GetScoreGame/>
       </DescriptionCard>
     </CardContainer>
