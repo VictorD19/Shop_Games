@@ -27,6 +27,7 @@ export const CarrouselMain = () => {
     autoplay: true,
     autoplaySpeed: 6000,
     slidesToShow: 2,
+    lazyLoad: true,
     slidesToScroll: 1,
     responsive: [
       {
