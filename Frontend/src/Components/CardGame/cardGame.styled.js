@@ -24,10 +24,9 @@ export const CardContainer = styled.div`
   img {
     width: 100%;
     border-radius: 10px;
-
   }
   figure {
-  transition: 0.5s all ease;
+    transition: 0.5s all ease;
 
     position: relative;
     transform: scale(0.95);
@@ -71,4 +70,10 @@ export const CardContainer = styled.div`
   transition: 0.3s all ease;
   border-radius: 10px;
   cursor: pointer;
+  @media only screen and (max-width: 600px) {
+    width: 11.5rem;
+    :hover {
+    border:none;
+  }
+  }
 `;
