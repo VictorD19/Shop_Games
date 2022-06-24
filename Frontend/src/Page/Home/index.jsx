@@ -86,6 +86,7 @@ export const HomePage = () => {
               title={title}
               genre={genre}
               id={_id}
+              newGame
               developer={developer}
               release_date={release_date}
               price={price}

@@ -5,6 +5,7 @@ export const DescriptionCard = styled.div`
   padding: 10px 0;
   transform: scale(0.95);
   transition: 0.5s all ease;
+  position: relative;
 
   h1 {
     font-size: 1.2em;
@@ -70,10 +71,23 @@ export const CardContainer = styled.div`
   transition: 0.3s all ease;
   border-radius: 10px;
   cursor: pointer;
+  position: relative;
+  .active {
+    position: absolute;
+    z-index: 3;
+    background: var(--success);
+    padding: 0.3rem;
+    right: 4px;
+    top: 2px;
+    font-size: 0.9em;
+    transform: scale(0.95);
+    border-radius: 0 10px 0 10px;
+    
+  }
   @media only screen and (max-width: 600px) {
     width: 11.5rem;
     :hover {
-    border:none;
-  }
+      border: none;
+    }
   }
 `;
