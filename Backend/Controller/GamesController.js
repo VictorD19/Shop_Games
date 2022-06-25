@@ -1,5 +1,6 @@
 const { default: axios } = require("axios");
 const config = require("../Config");
+const { Game } = require("../DB");
 const {
   getAllGamesService,
   getGameService,
@@ -146,6 +147,49 @@ module.exports = {
         listTrending.push(gameFullDetails);
       }
       return res.json(listTrending);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+  searchGameByParams: async (req, res) => {
+    // #swagger.tags = ['Games']
+    // #swagger.description = 'Busqueda de games por palabras'
+    try {
+      const { param } = req.params;
+      const { page } = req.query;
+      const listGamesByParams = await Game.find({
+        title: { $regex: param, $options: "i" },
+      });
+
+      const nPerPage = 20;
+      const PAGE = Number(page);
+
+      const count = listGamesByParams.length;
+      let nextPage;
+      let prevPage;
+      let totalPages;
+      const currentPage = PAGE;
+      const games = generatePagination(listGamesByParams, nPerPage, PAGE);
+
+      if (!(Math.floor(count / nPerPage) == 0)) {
+        totalPages = Math.ceil(count / nPerPage);
+        nextPage = PAGE + 1;
+      }
+      totalPages = count <= 0 ? null : totalPages;
+      nextPage = games.length == 0 || totalPages < nextPage ? null : nextPage;
+      prevPage = page != 1 ? page - 1 : null;
+
+      return res.json({
+        results: games,
+        pagination: {
+          count,
+          currentPage,
+          totalPages,
+          nextPage,
+          totalPages,
+          prevPage,
+        },
+      });
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }

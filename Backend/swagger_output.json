@@ -172,6 +172,35 @@
         }
       }
     },
+    "/search_games/{param}": {
+      "get": {
+        "tags": [
+          "Games"
+        ],
+        "description": "Busqueda de games por palabras",
+        "parameters": [
+          {
+            "name": "param",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/newuser": {
       "post": {
         "tags": [
