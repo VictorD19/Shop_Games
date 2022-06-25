@@ -5,7 +5,7 @@ import {
   Offcanvas,
   ListGroup,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ErrorAlert,
   FormLogin,
@@ -30,7 +30,7 @@ import { NewButton } from "../Button";
 import { loginUser } from "../../Api/userEndpoint";
 import { createCookie, getCookie } from "../../Utils/cookie";
 import { useDataUser } from "../../Context/userContext";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const dataLogin = {
   email: "",
@@ -44,6 +44,7 @@ export const Navbar = () => {
   const [error, setError] = useState("");
   const { userState, dispatch } = useDataUser();
   const { user } = userState;
+  const searchRef = useRef(null);
   const token = getCookie("token");
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
@@ -68,18 +69,26 @@ export const Navbar = () => {
         }, 3000);
       }
     }
-    // console.log(email, password);
-    console.log(isNewUser);
+  };
+
+  const navigate = useNavigate()
+
+  const handleSearchGames = (e) => {
+    e.preventDefault();
+    const params = searchRef.current.value
+    if(!params) return
+    navigate(`/search_games/${params}`)
+    searchRef.current.value=''
   };
 
   return (
     <>
       <NavbarContainer>
-        <div>Shop Game</div>
-        <div>
+        <div onClick={()=>navigate('/')}>Shop Game</div>
+        <form onSubmit={handleSearchGames}>
           <AiOutlineSearch size={20} />
-          <input type="text" />
-        </div>
+          <input type="text" ref={searchRef} />
+        </form>
         <PartOptions>
           <Link to="news">
             <BsNewspaper size={18} /> News
@@ -137,7 +146,7 @@ export const Navbar = () => {
           <ListGroup variant="flush">
             {!token && (
               <ListGroup.Item onClick={handleShowModal}>
-               <AiOutlineUser/> Login / Register
+                <AiOutlineUser /> Login / Register
               </ListGroup.Item>
             )}
             {token && (

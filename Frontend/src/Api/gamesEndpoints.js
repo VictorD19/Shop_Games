@@ -41,3 +41,13 @@ export const getGamesInitials = async () => {
     return { error: message };
   }
 };
+
+export const searchGames= async(param, page=1)=>{
+  try {
+    const response = await axios.get(`${BASE_URL_API}/search_games/${param}?page=${page}`);
+    return response.data;
+  } catch (error) {
+    const message = error.response.data;
+    return { error: message };
+  }
+}

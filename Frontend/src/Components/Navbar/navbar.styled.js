@@ -8,7 +8,7 @@ export const NavbarContainer = styled.div`
   justify-content: space-between;
   padding: 15px 20px;
 
-  div:nth-child(2) {
+  form {
     input {
       width: 25rem;
       height: 2.2rem;
@@ -32,7 +32,7 @@ export const NavbarContainer = styled.div`
     color: var(--gray);
   }
   @media only screen and (max-width: 600px) {
-    div:nth-child(2) {
+    form:nth-child(2) {
       input {
         width: 12rem;
       }
@@ -43,6 +43,7 @@ export const NavbarContainer = styled.div`
         top: 8px;
       }
     }
+
   }
 `;
 
@@ -126,7 +127,8 @@ export const PartOptions = styled.div`
     align-items: center;
     gap: 5px;
     padding: 0 5px;
-    a:nth-child(1),a:nth-child(2) {
+    a:nth-child(1),
+    a:nth-child(2) {
       display: none;
     }
     a:nth-child(3) {
@@ -169,5 +171,5 @@ export const FormLogin = styled(Form)`
 `;
 
 export const ErrorAlert = styled.div`
-color: var(--danger)
- `
+  color: var(--danger);
+`;
