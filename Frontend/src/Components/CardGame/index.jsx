@@ -12,9 +12,10 @@ export const CardGame = ({
   release_date,
   price,
   newGame,
+  isUser,
 }) => {
   return (
-    <CardContainer>
+    <CardContainer isUser={isUser ? "true" : ""}>
       {newGame && <span className={newGame ? "active" : ""}>New</span>}
 
       <figure>
@@ -26,7 +27,7 @@ export const CardGame = ({
           </NewButton>
         </figcaption>
       </figure>
-      <DescriptionCard>
+      <DescriptionCard isUser={isUser ? "true" : ""}>
         <h1>
           {title} <small>2022</small>
         </h1>
