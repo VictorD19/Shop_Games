@@ -23,6 +23,7 @@ import {
 import { CgGames } from "react-icons/cg";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { BsNewspaper } from "react-icons/bs";
+import { RiGameLine } from "react-icons/ri";
 import { ModalContainer } from "../Modal";
 import { NewInputForm } from "../Input";
 import { Formik } from "formik";
@@ -117,7 +118,7 @@ export const Navbar = () => {
                 id="drop-menus"
                 title={user?.email}
               >
-                <Dropdown.Item>Meus games</Dropdown.Item>
+                <Dropdown.Item onClick={()=>navigate('/my_games')}>Meus games</Dropdown.Item>
                 <Dropdown.Item onClick={handleLogout}>Sair</Dropdown.Item>
               </DropdownButton>
               <img
@@ -150,9 +151,14 @@ export const Navbar = () => {
               </ListGroup.Item>
             )}
             {token && (
+              <>
               <ListGroup.Item>
                 <AiOutlineUser /> {user?.email?.toUpperCase()}
               </ListGroup.Item>
+              <ListGroup.Item>
+              <RiGameLine onClick={()=>navigate('/my_games')} /> My games
+            </ListGroup.Item>
+              </>
             )}
 
             <ListGroup.Item>
