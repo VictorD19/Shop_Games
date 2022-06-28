@@ -2,6 +2,7 @@ import { NewButton } from "../Button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CardContainer, DescriptionCard } from "./cardGame.styled";
 import { GetScoreGame } from "../ScoreGame";
+import { useNavigate } from "react-router-dom";
 
 export const CardGame = ({
   title,
@@ -14,8 +15,12 @@ export const CardGame = ({
   newGame,
   isUser,
 }) => {
+  const navigate = useNavigate();
   return (
-    <CardContainer isUser={isUser ? "true" : ""}>
+    <CardContainer
+      isUser={isUser ? "true" : ""}
+      onClick={() => navigate(`/game/${id}`)}
+    >
       {newGame && <span className={newGame ? "active" : ""}>New</span>}
 
       <figure>
