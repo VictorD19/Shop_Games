@@ -23,7 +23,11 @@ module.exports = {
           params: { id: GameId },
         }
       );
-      return gameDetails.data;
+      const newGameData = gameDetails.data;
+      newGameData.GameId = GameId
+      newGameData.id = id
+      newGameData.price = game.price
+      return newGameData
     } catch (error) {
       return { error: error.message };
     }
