@@ -201,6 +201,30 @@
         }
       }
     },
+    "/games_genre/{genre}": {
+      "get": {
+        "tags": [
+          "Games"
+        ],
+        "description": "Return games by genre",
+        "parameters": [
+          {
+            "name": "genre",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/newuser": {
       "post": {
         "tags": [
