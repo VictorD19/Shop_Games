@@ -6,7 +6,7 @@ export const getCategoryOfGames = async () => {
     const response = await axios.get(`${BASE_URL_API}/categorys`);
     return response.data;
   } catch (error) {
-    const message = error.response.data;
+    const message = error.response.data.error;
     return { error: message };
   }
 };
@@ -15,7 +15,7 @@ export const getTrendingGames = async () => {
     const response = await axios.get(`${BASE_URL_API}/trending_games`);
     return response.data;
   } catch (error) {
-    const message = error.response.data;
+    const message = error.response.data.error;
     return { error: message };
   }
 };
@@ -37,7 +37,7 @@ export const getGamesInitials = async () => {
       newsGames: res3.data
     }
   } catch (error) {
-    const message = error.response.data;
+    const message = error.response.data.error;
     return { error: message };
   }
 };
@@ -47,7 +47,16 @@ export const searchGames= async(param, page=1)=>{
     const response = await axios.get(`${BASE_URL_API}/search_games/${param}?page=${page}`);
     return response.data;
   } catch (error) {
-    const message = error.response.data;
+    const message = error.response.data.error;
+    return { error: message };
+  }
+}
+export const getDetailsGame = async (id)=>{
+  try {
+    const response = await axios.get(`${BASE_URL_API}/game/${id}`);
+    return response.data;
+  } catch (error) {
+    const message = error.response.data.error;
     return { error: message };
   }
 }
