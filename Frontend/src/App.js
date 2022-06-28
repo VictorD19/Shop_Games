@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { HomePage } from "./Page/Home";
 import { Games } from "./Page/Games";
 import { MyGamesPage } from "./Page/MyGames";
+import { GameDetailsPage } from "./Page/GameDetails";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="search_games/:param" element={<Games />} />
       <Route path="my_games" element={<MyGamesPage />} />
+      <Route path="game/:gameId" element={<GameDetailsPage />} />
     </Routes>
   );
 }
