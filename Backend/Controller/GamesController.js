@@ -206,7 +206,6 @@ module.exports = {
       const allGames = await getAllGamesService();
       const listByGenre = allGames.filter((game) => game.genre === existGenre);
       const listLength = listByGenre.length;
-      console.log(listLength);
       if (listLength < 5) throw new Error("Insufficient games ");
       if (listLength >= 5 && listLength < 11)
         return res.status(200).send(listByGenre.slice(0, listLength - 1));
