@@ -95,12 +95,9 @@ export const Navbar = () => {
             <BsNewspaper size={18} /> News
           </Link>
           <Link to="games">
-            <HiMenuAlt1 size={18} /> Catalog of games
+            <HiMenuAlt1 size={18} /> All games
           </Link>
 
-          <Link to="games">
-            <CgGames size={20} />
-          </Link>
           <Link to="cart">
             <AiOutlineShoppingCart size={20} color="#6e6e89" />
             <Badge pill bg="primary">
