@@ -10,6 +10,7 @@ export const Content = styled(ContentHome)`
     margin-bottom: 1rem;
     img {
       width: 100%;
+      height: 26rem;
     }
   }
   .carousel {
@@ -32,6 +33,13 @@ export const Content = styled(ContentHome)`
   }
   @media only screen and (max-width: 600px) {
     flex-wrap: wrap;
+    .mainPhotos {
+    
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
     .descriptionGame {
       width: 100%;
       padding: 0.5rem;

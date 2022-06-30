@@ -4,6 +4,7 @@ export const RowList = styled.div`
   > h1 {
     font-size: 1.25em;
     font-weight: 600;
+    text-shadow: 1px 1px 0.5px #000;
     margin-bottom: 1.5rem;
   }
   .slick-prev,

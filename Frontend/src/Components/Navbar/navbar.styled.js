@@ -103,13 +103,11 @@ export const PartUser = styled.div`
 `;
 
 export const PartOptions = styled.div`
-  a:nth-child(3) {
-    display: none;
-  }
+ 
   a {
     margin: 0 5px;
   }
-  a:nth-child(4) {
+  a:nth-child(3) {
     position: relative;
     span {
       width: 1rem;
@@ -122,7 +120,7 @@ export const PartOptions = styled.div`
     }
   }
   @media only screen and (max-width: 600px) {
-    width: 5rem;
+    width: 2.5rem;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -131,9 +129,7 @@ export const PartOptions = styled.div`
     a:nth-child(2) {
       display: none;
     }
-    a:nth-child(3) {
-      display: block;
-    }
+   
   }
 `;
 
