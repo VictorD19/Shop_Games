@@ -60,3 +60,12 @@ export const getDetailsGame = async (id)=>{
     return { error: message };
   }
 }
+export const getSimilarGames = async (genre)=>{
+  try {
+    const response = await axios.get(`${BASE_URL_API}/games_genre/${genre}`);
+    return response.data;
+  } catch (error) {
+    const message = error.response.data.error;
+    return { error: message };
+  }
+}
