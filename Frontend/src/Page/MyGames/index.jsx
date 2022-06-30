@@ -20,7 +20,7 @@ export const MyGamesPage = () => {
                 ({
                   title,
                   genre,
-                  _id,
+                  id,
                   developer,
                   release_date,
                   price,
@@ -28,10 +28,10 @@ export const MyGamesPage = () => {
                 }) => (
                   <CardGame
                     thumbnail={thumbnail}
-                    key={_id}
+                    key={id}
                     title={title}
                     genre={genre}
-                    id={_id}
+                    id={id}
                     isUser
                     developer={developer}
                     release_date={release_date}
