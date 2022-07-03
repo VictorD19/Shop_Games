@@ -403,6 +403,50 @@
         ]
       }
     },
+    "/apply_discount_cart": {
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "Aplica um discount ao seu carinho 0 a 100%",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cupom": {
+                  "type": "string",
+                  "example": "cupon"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/user_details": {
       "get": {
         "tags": [
@@ -420,6 +464,51 @@
           "200": {
             "description": "OK"
           },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/new_cupom": {
+      "post": {
+        "tags": [
+          "Cupons"
+        ],
+        "description": "Cria um novo cupom",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "NOMECUPOM"
+                },
+                "value": {
+                  "type": "number",
+                  "example": 0
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
           "400": {
             "description": "Bad Request"
           },
