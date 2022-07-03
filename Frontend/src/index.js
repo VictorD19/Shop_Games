@@ -9,18 +9,20 @@ import { AlertsProvider } from "./Context/alertContext";
 import { UserProvider } from "./Context/userContext";
 import "../node_modules/slick-carousel/slick/slick.css";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
-
+import { CartProvider } from "./Context/cartContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <ThemeProvider breakpoints={["lg", "md", "sm", "xs"]}>
-          <AlertsProvider>
-            <App />
-          </AlertsProvider>
-        </ThemeProvider>
+        <CartProvider>
+          <ThemeProvider breakpoints={["lg", "md", "sm", "xs"]}>
+            <AlertsProvider>
+              <App />
+            </AlertsProvider>
+          </ThemeProvider>
+        </CartProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>

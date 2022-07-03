@@ -1,5 +1,5 @@
 import { removeCookie } from "../../Utils/cookie";
-import { initialUserData } from "./initialState";
+import { initialUserData, initialCart } from "./initialState";
 
 export const reducerUser = (state, action) => {
   switch (action.method) {
@@ -11,5 +11,19 @@ export const reducerUser = (state, action) => {
       return initialUserData;
     default:
       return initialUserData;
+  }
+};
+
+export const reducerCart = (state, action) => {
+  switch (action.method) {
+    case "INITIAL_CART":
+      const cart = action.cart;
+      return { ...state, ...cart };
+    case "UPDATE_CART":
+      const newCart = action.cart;
+      return { ...state, ...newCart };
+
+    default:
+      return initialCart;
   }
 };
