@@ -6,6 +6,7 @@ const CartSchema = new Schema({
   products: [],
   amount: Number,
   total: Number,
+  discount: Number
 });
 
 module.exports = mongoose.model("CartUser", CartSchema);

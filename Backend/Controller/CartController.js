@@ -1,4 +1,4 @@
-const { Cart, Game } = require("../DB");
+const { Cart, Game, Cupom } = require("../DB");
 const { getGameService } = require("../Services/games.service");
 const { getTotalPrice } = require("../Utils");
 
@@ -12,6 +12,7 @@ module.exports = {
     try {
       const idUser = res.userId;
       const [cartDetails] = await Cart.find({ idUser: idUser });
+      console.log(cartDetails);
       cartDetails.idUser = undefined;
       cartDetails.__v = undefined;
       return res.json(cartDetails);
@@ -30,19 +31,18 @@ module.exports = {
       const idUser = res.userId;
       const findGame = await Game.findById(idGame);
       if (!findGame)
-        throw new Error(
-          "Impossivel adicionar item ao carrinho, game não existe!"
-        );
+        throw new Error("Unable to add item to cart, game does not exist!");
 
       const [cartDetails] = await Cart.find({ idUser: idUser });
       const [existGameInCart] = cartDetails.products.filter(
         (game) => game.idGame === idGame
       );
-      if (existGameInCart) throw new Error("Item já esta no carrinho");
+      if (existGameInCart) throw new Error("Item is already in cart");
 
-      const { title, price } = findGame;
+      const { title, price, thumbnail } = findGame;
       const game = {
         idGame,
+        thumbnail,
         title,
         price,
       };
@@ -60,7 +60,7 @@ module.exports = {
     }
   },
   async deleteItemCart(req, res) {
-       // #swagger.tags = ['Cart']
+    // #swagger.tags = ['Cart']
     // #swagger.description = 'Elimina item do carrinho de compras'
     /* #swagger.security = [{
       "apiKeyAuth": []
@@ -73,7 +73,7 @@ module.exports = {
       const [findGame] = cartDetails.products.filter(
         (item) => item.idGame === idGame
       );
-      if (!findGame) throw new Error("Item no carrinho não existe!");
+      if (!findGame) throw new Error("Item in cart does not exist!");
       cartDetails.products = cartDetails.products.filter(
         (item) => item.idGame !== idGame
       );
@@ -82,11 +82,46 @@ module.exports = {
           ? getTotalPrice(cartDetails.products)
           : 0;
       cartDetails.amount = cartDetails.products.length;
+      cartDetails.discount = cartDetails.amount == 0 ? 0 : cartDetails.discount;
       await cartDetails.save();
 
       cartDetails.idUser = undefined;
       cartDetails.__v = undefined;
 
+      return res.status(200).json(cartDetails);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+  async applyDiscountCart(req, res) {
+    // #swagger.tags = ['Cart']
+    // #swagger.description = 'Aplica um discount ao seu carinho 0 a 100%'
+    /*  #swagger.parameters['obj'] = {
+                in: 'body',
+                schema: {
+                    cupom: 'cupon',
+                    
+                }
+        } */
+    /* #swagger.security = [{
+      "apiKeyAuth": []
+    }] */
+    try {
+      const idUser = res.userId;
+      const { cupom } = req.body;
+      const [cartDetails] = await Cart.find({ idUser });
+      if (!cartDetails) throw new Error("Cart does not exist");
+      const [findCupom] = await Cupom.find({ name: cupom });
+      if (!findCupom) throw new Error("Cupom does not exist");
+      if (cartDetails.discount) throw new Error("Already applied a coupon");
+      const { value: discount } = findCupom;
+      const total = cartDetails.total;
+      const valueDiscount = (total / 100) * discount;
+      cartDetails.total = total - valueDiscount;
+      cartDetails.discount = discount;
+      await cartDetails.save();
+      cartDetails.idUser = undefined;
+      cartDetails._v = undefined;
       return res.status(200).json(cartDetails);
     } catch (error) {
       return res.status(400).json({ error: error.message });

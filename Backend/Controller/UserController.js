@@ -38,6 +38,7 @@ module.exports = {
           products: [],
           amount: 0,
           total: 0,
+          discount: 0,
         });
         await cart.save();
 
