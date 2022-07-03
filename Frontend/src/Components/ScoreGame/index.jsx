@@ -6,7 +6,11 @@ export const GetScoreGame = () => {
   return (
     <div>
       {[...Array(5)].map((_, index) =>
-        index <= numberStarRandom ? <AiFillStar color={color} /> : <AiOutlineStar />
+        index <= numberStarRandom ? (
+          <AiFillStar color={color} key={index} />
+        ) : (
+          <AiOutlineStar key={index} />
+        )
       )}
     </div>
   );
