@@ -75,7 +75,7 @@ export const CarrouselMain = () => {
                 <div></div>
                 <div>
                   <h1>{title}</h1>
-                  <p>{short_description.substring(0, 193) + ' ...'}</p>
+                  <p>{short_description?.substring(0, 193) + ' ...'}</p>
                   <div className='details'>
                     <div> <b>Genrer:</b>  <br /> {genre} </div>
                     <div>  <b>Release data: </b> <br /> {release_date}</div>
