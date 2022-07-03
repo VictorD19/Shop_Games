@@ -28,7 +28,7 @@ export const getDataUser = async () => {
   try {
     const response = await axios.get(
       `${BASE_URL_API}/user_details`,
-      getConfigAuth()
+      await getConfigAuth()
     );
     return response.data;
   } catch (error) {
