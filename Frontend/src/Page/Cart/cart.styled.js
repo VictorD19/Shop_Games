@@ -4,7 +4,7 @@ export const CartContainer = styled.div`
   display: flex;
   width: 90%;
   margin: auto;
-  gap: 15px;
+  gap: 1.2rem;
   padding: 3rem;
   > div {
     flex: 3;
@@ -12,7 +12,7 @@ export const CartContainer = styled.div`
   aside {
     flex: 1;
   }
-  span {
+  > div > span {
     background: var(--primary);
     padding: 8px 10px;
   }
@@ -52,5 +52,87 @@ export const CartItemPrice = styled.div`
 export const CartItemActions = styled.div``;
 
 export const CartDetails = styled.aside`
-  padding: 0.3rem 0;
+  padding: 0.3rem 0 0.3rem 0.5rem;
+  text-align: center;
+  li {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    span {
+      font-weight: 500;
+    }
+  }
+  form {
+    margin-bottom: 1rem;
+  }
+  > button {
+    width: 100%;
+    margin-bottom: 1rem ;
+  }
+`;
+
+export const ProgressContainer = styled.div`
+  width: 40%;
+  margin: 2rem auto 0.8rem;
+  position: relative;
+  .progress {
+    width: 99%;
+    background: #19171fee;
+  }
+  .progress-bar {
+    background: var(--primary);
+  }
+
+  .stepContainer {
+    position: absolute;
+    top: -1rem;
+    left: -4px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    span:nth-child(1) {
+      position: relative;
+      :before {
+        position: absolute;
+        bottom: -1.3rem;
+        left: -1rem;
+        font-weight: 600;
+        width: 6rem;
+        text-align: start;
+        content: "Cart items";
+      }
+    }
+    span:nth-child(2) {
+      position: relative;
+      :before {
+        position: absolute;
+        bottom: -1.3rem;
+        left: -1rem;
+        font-weight: 600;
+        width: 6rem;
+        text-align: start;
+        content: "Payament";
+      }
+    }
+    span:nth-child(3) {
+      position: relative;
+      :before {
+        position: absolute;
+        bottom: -1.3rem;
+        left: -0.5rem;
+        font-weight: 600;
+        width: 6rem;
+        text-align: start;
+        content: "Confirm";
+      }
+    }
+  }
+  .step {
+    padding: 1rem 1.3rem;
+    border-radius: 50%;
+    background: var(--gray);
+    text-align: center;
+  }
+  .active {
+    background: var(--primary);
+  }
 `;
