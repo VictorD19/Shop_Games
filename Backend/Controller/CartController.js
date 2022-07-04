@@ -83,6 +83,10 @@ module.exports = {
           : 0;
       cartDetails.amount = cartDetails.products.length;
       cartDetails.discount = cartDetails.amount == 0 ? 0 : cartDetails.discount;
+      if (cartDetails.discount) {
+        const valueDiscount = (cartDetails.total / 100) * cartDetails.discount;
+        cartDetails.total = cartDetails.total - valueDiscount;
+      }
       await cartDetails.save();
 
       cartDetails.idUser = undefined;
