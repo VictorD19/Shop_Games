@@ -133,6 +133,7 @@ export const ProgressContainer = styled.div`
     text-align: center;
   }
   .active {
+    transition: 0.4s all ease;
     background: var(--primary);
   }
 `;
