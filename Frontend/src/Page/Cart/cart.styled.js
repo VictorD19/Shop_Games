@@ -110,7 +110,7 @@ export const ProgressContainer = styled.div`
         font-weight: 600;
         width: 6rem;
         text-align: start;
-        content: "Payament";
+        content: "Payment";
       }
     }
     span:nth-child(3) {
@@ -135,5 +135,17 @@ export const ProgressContainer = styled.div`
   .active {
     transition: 0.4s all ease;
     background: var(--primary);
+  }
+`;
+
+export const RemoveCupom = styled.div`
+  margin-top: 1rem;
+  color: #c44853;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.8;
+  :hover {
+    transition: 0.3s all ease;
+    opacity: 1;
   }
 `;

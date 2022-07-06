@@ -52,3 +52,15 @@ export const applyDiscount = async (cupom) => {
     return { error: message };
   }
 };
+export const removeDiscount = async () => {
+  try {
+    const response = await axios.delete(
+      `${BASE_URL_API}/remove_discount_cart`,
+      await getConfigAuth()
+    );
+    return response.data;
+  } catch (error) {
+    const message = error.response.data.error;
+    return { error: message };
+  }
+};
