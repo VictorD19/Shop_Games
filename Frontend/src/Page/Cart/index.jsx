@@ -1,9 +1,12 @@
 import { Formik } from "formik";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Form, FormControl, InputGroup, ProgressBar } from "react-bootstrap";
-import { applyDiscount, removeItemCart } from "../../Api/cartEnpoints";
+import {
+  applyDiscount,
+  removeDiscount,
+  removeItemCart,
+} from "../../Api/cartEnpoints";
 import { NewButton } from "../../Components/Button";
-import { NewInputForm } from "../../Components/Input";
 import { NewTitle } from "../../Components/Title";
 import { useAlert } from "../../Context/alertContext";
 import { useCart } from "../../Context/cartContext";
@@ -15,6 +18,7 @@ import {
   CartItemInfo,
   CartItemPrice,
   ProgressContainer,
+  RemoveCupom,
 } from "./cart.styled";
 import { Confirm } from "./Confirm";
 import { Payament } from "./Payament";
@@ -24,23 +28,43 @@ export const CartPage = () => {
   const { handleCreateToast } = useAlert();
   const [progress, setProgress] = useState(0);
   const { products, amount, total, discount } = cartState;
+  const [selectCard, setCart] = useState("");
+  const [active, setActive] = useState(false);
   const handleApplyDiscount = async ({ cupom }) => {
     try {
       const discountCart = await applyDiscount(cupom);
       if (discountCart.error) throw new Error(discountCart.error);
       dispatch({ method: "UPDATE_CART", cart: discountCart });
+      handleCreateToast("success", "Discount applied");
     } catch (error) {
       return handleCreateToast("error", error.message);
     }
   };
-  const handleNextStep = () => {
-    if (progress === 0) setProgress(50);
-    if (progress === 50) setProgress(100);
+  const handleNextStep = (values = {}) => {
+    if (progress === 0) {
+      setProgress(50);
+      setActive(true);
+    }
+    if (progress === 50) {
+      setProgress(100);
+      setActive(true);
+      return;
+    }
     if (progress === 100) console.log("games");
   };
   const handleBackStep = () => {
     if (progress === 100) setProgress(50);
     if (progress === 50) setProgress(0);
+  };
+  const handleRemoveDiscount = async () => {
+    try {
+      const newCart = await removeDiscount();
+      if (newCart.error) throw new Error(newCart.error);
+      dispatch({ method: "UPDATE_CART", cart: newCart });
+      handleCreateToast("success", "Discount removed");
+    } catch (error) {
+      return handleCreateToast("error", error.message);
+    }
   };
   return (
     <LayoutPage>
@@ -69,7 +93,13 @@ export const CartPage = () => {
             ))}
           </div>
         )}
-        {progress === 50 && <Payament />}
+        {progress === 50 && (
+          <Payament
+            selectCard={selectCard}
+            setCart={setCart}
+            setActive={setActive}
+          />
+        )}
         {progress === 100 && <Confirm />}
 
         <CartDetails>
@@ -85,27 +115,42 @@ export const CartPage = () => {
               Total: <span>{total}</span>
             </li>
           </ul>
-          <Formik initialValues={{ cupom: "" }} onSubmit={handleApplyDiscount}>
-            {({ handleSubmit, handleChange, values }) => (
-              <Form>
-                <InputGroup>
-                  <FormControl
-                    name="cupom"
-                    onChange={handleChange}
-                    value={values.cupom}
-                  />
-                  <NewButton onClick={handleSubmit} type="submit">
-                    Apply
-                  </NewButton>
-                </InputGroup>
-              </Form>
-            )}
-          </Formik>
-          <NewButton variant="success" onClick={handleNextStep}>
+          {progress === 0 && (
+            <Formik
+              initialValues={{ cupom: "" }}
+              onSubmit={handleApplyDiscount}
+            >
+              {({ handleSubmit, handleChange, values }) => (
+                <Form>
+                  <InputGroup>
+                    <FormControl
+                      name="cupom"
+                      onChange={handleChange}
+                      value={values.cupom}
+                      placeholder="Apply cupom"
+                    />
+                    <NewButton onClick={handleSubmit} type="submit">
+                      Apply
+                    </NewButton>
+                  </InputGroup>
+                  {discount !== 0 && (
+                    <RemoveCupom onClick={handleRemoveDiscount}>
+                      Remove Cupom
+                    </RemoveCupom>
+                  )}
+                </Form>
+              )}
+            </Formik>
+          )}
+          <NewButton
+            variant="success"
+            disabled={active}
+            onClick={handleNextStep}
+          >
             {progress === 0
               ? "GO TO PAYMENT"
               : progress === 50
-              ? "CONFIRM"
+              ? "PAY"
               : "TO GAMES"}
           </NewButton>
           {progress >= 50 && (
