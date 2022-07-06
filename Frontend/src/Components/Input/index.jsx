@@ -24,6 +24,7 @@ export const NewInputForm = ({
         onChange={onChange}
         value={value}
         size={size}
+        min="1"
         isValid={!!isValid}
         placeholder={placeholder}
         isInvalid={error}
