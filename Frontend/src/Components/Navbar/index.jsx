@@ -33,6 +33,7 @@ import { createCookie, getCookie } from "../../Utils/cookie";
 import { useDataUser } from "../../Context/userContext";
 import { useRef, useState } from "react";
 import { useCart } from "../../Context/cartContext";
+import { getCartDetails } from "../../Api/cartEnpoints";
 
 const dataLogin = {
   email: "",
@@ -64,6 +65,8 @@ export const Navbar = () => {
         if (error) throw new Error(error);
         createCookie("token", token);
         dispatch({ method: "INITIAL_USER", data: user });
+        const cartDetails = await getCartDetails();
+        dispatch({ method: "INITIAL_CART", cart: cartDetails });
         handleCloseModal();
       } catch (error) {
         setError(error.message);
