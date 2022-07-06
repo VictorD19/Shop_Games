@@ -12,7 +12,6 @@ module.exports = {
     try {
       const idUser = res.userId;
       const [cartDetails] = await Cart.find({ idUser: idUser });
-      console.log(cartDetails);
       cartDetails.idUser = undefined;
       cartDetails.__v = undefined;
       return res.json(cartDetails);
@@ -126,6 +125,26 @@ module.exports = {
       await cartDetails.save();
       cartDetails.idUser = undefined;
       cartDetails._v = undefined;
+      return res.status(200).json(cartDetails);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+  async removeDiscountCart(req, res) {
+    // #swagger.tags = ['Cart']
+    // #swagger.description = 'Remove disconto do carrinho'
+    /* #swagger.security = [{
+      "apiKeyAuth": []
+    }] */
+    try {
+      const idUser = res.userId;
+      const [cartDetails] = await Cart.find({ idUser });
+      if (!cartDetails) throw new Error("Cart does not exist");
+      cartDetails.total = getTotalPrice(cartDetails.products);
+      cartDetails.discount = 0;
+      await cartDetails.save();
+      cartDetails.idUser = undefined;
+      cartDetails.__v = undefined;
       return res.status(200).json(cartDetails);
     } catch (error) {
       return res.status(400).json({ error: error.message });

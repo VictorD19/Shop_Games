@@ -447,6 +447,37 @@
         ]
       }
     },
+    "/remove_discount_cart": {
+      "delete": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "Remove disconto do carrinho",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/user_details": {
       "get": {
         "tags": [
