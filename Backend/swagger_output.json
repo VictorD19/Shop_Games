@@ -403,6 +403,37 @@
         ]
       }
     },
+    "/pay_cart": {
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "Processa pagamento do carrinho",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/apply_discount_cart": {
       "post": {
         "tags": [

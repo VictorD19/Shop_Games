@@ -5,6 +5,7 @@ const {
   deleteItemCart,
   applyDiscountCart,
   removeDiscountCart,
+  payCart,
 } = require("../Controller/CartController");
 const { createCupom } = require("../Controller/CupomContoller");
 const {
@@ -45,6 +46,7 @@ Routes.use(authMiddleware);
 Routes.get("/cart_details", getCartDetails);
 Routes.post("/add_item_cart/:idGame", addItemCart);
 Routes.delete("/delete_item_cart/:idGame", deleteItemCart);
+Routes.post("/pay_cart", payCart);
 
 Routes.post("/apply_discount_cart", applyDiscountCart);
 Routes.delete("/remove_discount_cart", removeDiscountCart);

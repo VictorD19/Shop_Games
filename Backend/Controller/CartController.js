@@ -1,4 +1,4 @@
-const { Cart, Game, Cupom } = require("../DB");
+const { Cart, Game, Cupom, User } = require("../DB");
 const { getGameService } = require("../Services/games.service");
 const { getTotalPrice } = require("../Utils");
 
@@ -146,6 +146,44 @@ module.exports = {
       cartDetails.idUser = undefined;
       cartDetails.__v = undefined;
       return res.status(200).json(cartDetails);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+  async payCart(req, res) {
+    // #swagger.tags = ['Cart']
+    // #swagger.description = 'Processa pagamento do carrinho'
+    /* #swagger.security = [{
+      "apiKeyAuth": []
+    }] */
+
+    try {
+      const idUser = res.userId;
+      const [cartDetails] = await Cart.find({ idUser });
+      if (!cartDetails) throw new Error("Cart does not exist");
+      const existUser = await User.findById(idUser);
+      if (cartDetails.amount === 0) throw new Error("Cart has no items ");
+      if (!existUser) throw new Error("User does not exist");
+      const listGamesIds = cartDetails.products.map((game) => game.idGame);
+
+      const listDetailsGames = await Game.find({
+        _id: {
+          $in: listGamesIds,
+        },
+      });
+      existUser.games = [...existUser.games, ...listDetailsGames];
+      await existUser.save();
+      cartDetails.products = [];
+      cartDetails.cartDetails = 0;
+      cartDetails.total = 0;
+      cartDetails.discount = 0;
+      cartDetails.amount = 0;
+      await cartDetails.save();
+
+      return res.status(200).json({
+        games: existUser.games,
+        cart: cartDetails,
+      });
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
