@@ -110,14 +110,14 @@ export const Navbar = () => {
           <input type="text" ref={searchRef} />
         </form>
         <PartOptions>
-          <Link to="news">
+          <Link to="/news">
             <BsNewspaper size={18} /> News
           </Link>
-          <Link to="games">
+          <Link to="/games">
             <HiMenuAlt1 size={18} /> All games
           </Link>
           {token && (
-            <Link to="cart">
+            <Link to="/cart">
               <AiOutlineShoppingCart size={20} color="#6e6e89" />
               <Badge pill bg="primary">
                 {cartState?.amount}
