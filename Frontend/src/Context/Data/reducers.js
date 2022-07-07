@@ -6,6 +6,8 @@ export const reducerUser = (state, action) => {
     case "INITIAL_USER":
       const { email, _id, games } = action.data;
       return { user: { email, _id }, my_games: games };
+    case "UPDATED_GAMES":
+      return {...state,my_games: action.games }
     case "LOGOUT":
       removeCookie("token");
       return initialUserData;
