@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import { useRef, useState } from "react";
 import { Form, FormControl, InputGroup, ProgressBar } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import {
   applyDiscount,
   removeDiscount,
@@ -30,6 +31,7 @@ export const CartPage = () => {
   const { products, amount, total, discount } = cartState;
   const [selectCard, setCart] = useState("");
   const [active, setActive] = useState(false);
+  const navigate = useNavigate()
   const handleApplyDiscount = async ({ cupom }) => {
     try {
       const discountCart = await applyDiscount(cupom);
@@ -50,7 +52,9 @@ export const CartPage = () => {
       setActive(true);
       return;
     }
-    if (progress === 100) console.log("games");
+    if (progress === 100) {
+      navigate('/my_games')
+    }
   };
   const handleBackStep = () => {
     if (progress === 100) setProgress(50);
@@ -100,7 +104,7 @@ export const CartPage = () => {
             setActive={setActive}
           />
         )}
-        {progress === 100 && <Confirm />}
+        {progress === 100 && <Confirm setActive={setActive} />}
 
         <CartDetails>
           <NewTitle>Cart details</NewTitle>
