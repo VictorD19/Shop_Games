@@ -64,3 +64,17 @@ export const removeDiscount = async () => {
     return { error: message };
   }
 };
+
+export const sendBuyOfGame = async () => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL_API}/pay_cart`,
+      null,
+      await getConfigAuth()
+    );
+    return response.data;
+  } catch (error) {
+    const message = error.response.data.error;
+    return { error: message };
+  }
+};
