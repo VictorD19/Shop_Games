@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "app": "nodemon index.js",
-    "auto-docs": "node swagger.js"
+    "auto-docs": "node swagger.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,9 @@
     "swagger-ui-express": "^4.4.0"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "jest": "^28.1.2",
+    "supertest": "^6.2.4",
     "swagger-autogen": "^2.21.3"
   }
 }

@@ -16,7 +16,7 @@ module.exports = {
     try {
       const { email, password } = req.body;
 
-      if (!email || !password) {
+      if (!email) {
         throw new Error("Email não pode ser nulo");
       }
       if (!password) {
